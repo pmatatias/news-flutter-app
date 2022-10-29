@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/screen/news_list.dart';
+import 'package:news_app/screen/splash_screen.dart';
+import 'package:news_app/utils/appstate.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,14 +13,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-       
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => AppState(),
+      child: MaterialApp(
+        title: 'Flutter News App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const SpalashScreen(),
       ),
-      home: const NewsList(),
     );
   }
 }
-

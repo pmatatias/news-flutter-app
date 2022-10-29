@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/api/api.dart';
+import 'package:news_app/component/news_card.dart';
 import 'package:news_app/model/model.dart';
 import 'package:news_app/screen/news_detail.dart';
+import 'package:news_app/utils/appstate.dart';
+import 'package:provider/provider.dart';
 
 class NewsList extends StatefulWidget {
   const NewsList({super.key});
@@ -14,15 +17,18 @@ class _NewsListState extends State<NewsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("News Flutter App"),
+      ),
       body: FutureBuilder<NewsInfo>(
-        future: fetchNewsInfo(),
+        future: fetchNewsInfo(context.read<AppState>(), query: ''),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final list = snapshot.data!.articles;
             return ListView.builder(
               itemCount: list.length,
-              itemBuilder: (context, index) => InkWell(
+              itemBuilder: (context, index) => NewsCard(
+                data: list[index],
                 onTap: () {
                   Navigator.push(
                       context,
@@ -30,9 +36,6 @@ class _NewsListState extends State<NewsList> {
                         builder: (context) => NewsDetails(data: list[index]),
                       ));
                 },
-                child: Card(
-                  child: Text('${list[index].title}'),
-                ),
               ),
             );
           } else if (snapshot.hasError) {

@@ -15,9 +15,12 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   http: ^0.13.5
-  dotenv: ^4.0.1
   provider: ^6.0.4
   json_annotation: ^4.7.0
+  flutter_dotenv: ^5.0.2
+  intl: ^0.17.0
+  moment_dart: ^0.10.3
+  flutter_webview_plugin: ^0.4.0
 
 dev_dependencies:
   flutter_test:
@@ -33,7 +36,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - .env
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
